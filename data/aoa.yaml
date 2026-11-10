@@ -1,0 +1,18 @@
+# Trade study (DOSSIER section 11). Importance ratings 1-10 [W2016 ch. 32]; normalised to weights at run time.
+# Measured criteria come from the analysis; judged criteria are listed with their rationale (assumed).
+criteria:
+  timing:      {rating: 9, kind: measured, note: "share of the yaw-loop chain budget left with +30 % growth and the error model"}
+  load:        {rating: 7, kind: measured, note: "worst by-wire bus load with growth (lower is better)"}
+  reliability: {rating: 8, kind: measured, note: "steer-command path reliability over 12 h"}
+  maturity:    {rating: 8, kind: judged, note: "qualification and supply risk of the technology in military ground vehicles"}
+  integration: {rating: 6, kind: judged, note: "number of ECUs needing a new network interface or stack"}
+  cost:        {rating: 5, kind: judged, note: "recurring network cost per vehicle, indicative"}
+  mass:        {rating: 3, kind: judged, note: "harness and switch mass added for the network"}
+  capacity:    {rating: 4, kind: measured, note: "backbone capacity left for C4I/video growth"}
+judged:          # basis: assumed (engineering judgement, DOSSIER 11.4 gives the reasoning)
+  maturity:    {A2: 9, A3: 7, A4: 5}
+  integration: {A2: 5, A3: 5, A4: 5}      # nodes needing a new interface: dual CAN / CAN FD / Ethernet+TSN
+  integration_effort: {A2: 1.0, A3: 1.5, A4: 3.0}   # relative effort per node (new stack, conformance)
+  cost_eur:    {A2: 1400, A3: 1700, A4: 21000}
+  mass_kg:     {A2: 3.2, A3: 3.2, A4: 9.5}
+monte_carlo_draws: 2000

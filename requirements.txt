@@ -1,0 +1,8 @@
+numpy>=1.26
+matplotlib>=3.8
+PyYAML>=6.0
+python-can>=4.3
+cantools>=39.0
+Markdown>=3.5
+pytest>=8.0
+ruff>=0.5

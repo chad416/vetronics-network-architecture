@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: ruff check vnet tools tests
+
+      - name: C library (gcc, -Wall -Wextra -Wpedantic -Wconversion -Werror) and C unit tests
+        run: make -C c test
+
+      - name: Data checks (sources resolve) and generated files are current
+        run: |
+          python -c "from vnet import data; bad = data.check_sources(); print(bad); assert not bad"
+          python tools/make_dbc.py --check
+          python tools/traceability.py --check
+          python tools/results_md.py --check
+
+      - name: Unit and integration tests (C code through ctypes, python-can virtual buses)
+        run: python -m pytest -v
+
+      - name: Demo runs
+        run: |
+          python -m vnet bench
+          python -m vnet rta --arch A0
+          python -m vnet rta --arch A2 --growth --errors
+          python -m vnet loops
+          python -m vnet chains
+          python -m vnet ether --rate 1000 --bywire
+          python -m vnet faults
+          python -m vnet all --quick

@@ -1,0 +1,699 @@
+{
+ "budgets_ms": {
+  "YAW": 24.284981053688767,
+  "ACT_CENTRAL": 22.378123095529524,
+  "PATH": 106.7123032384711
+ },
+ "archs": {
+  "A0": [
+   {
+    "chain": "YAW",
+    "total_ms": 23.984,
+    "budget_ms": 24.284981053688767,
+    "ok": true,
+    "hops": [
+     [
+      "INS_DYN",
+      8.412
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      4.572
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "ACT_CENTRAL",
+    "total_ms": 52.516000000000005,
+    "budget_ms": 22.378123095529524,
+    "ok": false,
+    "hops": [
+     [
+      "SAS1_STAT",
+      36.944
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      4.572
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "PATH",
+    "total_ms": Infinity,
+    "budget_ms": 106.7123032384711,
+    "ok": false,
+    "hops": [
+     [
+      "NAV_POS",
+      Infinity
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      4.572
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_STEER",
+    "total_ms": 21.424,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      5.852
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      4.572
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_BRAKE",
+    "total_ms": 27.984,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      5.852
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "BRAKE_CMD",
+      7.132
+     ],
+     [
+      "EBS",
+      5.0
+     ]
+    ]
+   }
+  ],
+  "A1": [
+   {
+    "chain": "YAW",
+    "total_ms": 18.492,
+    "budget_ms": 24.284981053688767,
+    "ok": true,
+    "hops": [
+     [
+      "INS_DYN",
+      4.706
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "ACT_CENTRAL",
+    "total_ms": 21.052,
+    "budget_ms": 22.378123095529524,
+    "ok": true,
+    "hops": [
+     [
+      "SAS1_STAT",
+      7.266
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "PATH",
+    "total_ms": 39.150416,
+    "budget_ms": 106.7123032384711,
+    "ok": true,
+    "hops": [
+     [
+      "NAV_POS",
+      25.364416
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_STEER",
+    "total_ms": 17.212,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      3.426
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_BRAKE",
+    "total_ms": 22.492,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      3.426
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "BRAKE_CMD",
+      4.066
+     ],
+     [
+      "EBS",
+      5.0
+     ]
+    ]
+   }
+  ],
+  "A2": [
+   {
+    "chain": "YAW",
+    "total_ms": 17.852,
+    "budget_ms": 24.284981053688767,
+    "ok": true,
+    "hops": [
+     [
+      "INS_DYN",
+      4.066
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "ACT_CENTRAL",
+    "total_ms": 19.132,
+    "budget_ms": 22.378123095529524,
+    "ok": true,
+    "hops": [
+     [
+      "SAS1_STAT",
+      5.346
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "PATH",
+    "total_ms": 15.101096598785407,
+    "budget_ms": 106.7123032384711,
+    "ok": true,
+    "hops": [
+     [
+      "INS_VCU (Ethernet)",
+      1.315096598785408
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_STEER",
+    "total_ms": 17.212,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      3.426
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.786
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_BRAKE",
+    "total_ms": 22.172,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      3.426
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "BRAKE_CMD",
+      3.746
+     ],
+     [
+      "EBS",
+      5.0
+     ]
+    ]
+   }
+  ],
+  "A3": [
+   {
+    "chain": "YAW",
+    "total_ms": 15.773,
+    "budget_ms": 24.284981053688767,
+    "ok": true,
+    "hops": [
+     [
+      "INS_DYN",
+      2.7295
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.0435
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "ACT_CENTRAL",
+    "total_ms": 16.459,
+    "budget_ms": 22.378123095529524,
+    "ok": true,
+    "hops": [
+     [
+      "SAS1_STAT",
+      3.4155
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.0435
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "PATH",
+    "total_ms": 14.358596598785407,
+    "budget_ms": 106.7123032384711,
+    "ok": true,
+    "hops": [
+     [
+      "INS_VCU (Ethernet)",
+      1.315096598785408
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.0435
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_STEER",
+    "total_ms": 15.43,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      2.3865
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD",
+      2.0435
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_BRAKE",
+    "total_ms": 19.944499999999998,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_IN",
+      2.3865
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "BRAKE_CMD",
+      2.558
+     ],
+     [
+      "EBS",
+      5.0
+     ]
+    ]
+   }
+  ],
+  "A4": [
+   {
+    "chain": "YAW",
+    "total_ms": 13.6268659955072,
+    "budget_ms": 24.284981053688767,
+    "ok": true,
+    "hops": [
+     [
+      "INS_DYN_E (Ethernet)",
+      1.32006743730432
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD_E (Ethernet)",
+      1.30679855820288
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "ACT_CENTRAL",
+    "total_ms": 13.6268659955072,
+    "budget_ms": 22.378123095529524,
+    "ok": true,
+    "hops": [
+     [
+      "SAS_STAT_E (Ethernet)",
+      1.32006743730432
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD_E (Ethernet)",
+      1.30679855820288
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "PATH",
+    "total_ms": 13.621895156988288,
+    "budget_ms": 106.7123032384711,
+    "ok": true,
+    "hops": [
+     [
+      "INS_VCU (Ethernet)",
+      1.315096598785408
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD_E (Ethernet)",
+      1.30679855820288
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_STEER",
+    "total_ms": 13.6268659955072,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_E (Ethernet)",
+      1.32006743730432
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "STEER_CMD_E (Ethernet)",
+      1.30679855820288
+     ],
+     [
+      "SAS",
+      1.0
+     ]
+    ]
+   },
+   {
+    "chain": "DRIVER_BRAKE",
+    "total_ms": 17.6268659955072,
+    "budget_ms": 50,
+    "ok": true,
+    "hops": [
+     [
+      "DRIVER_E (Ethernet)",
+      1.32006743730432
+     ],
+     [
+      "VCU",
+      10.0
+     ],
+     [
+      "BRAKE_E (Ethernet)",
+      1.30679855820288
+     ],
+     [
+      "EBS",
+      5.0
+     ]
+    ]
+   }
+  ]
+ },
+ "A2_yaw_split_ms": {
+  "bus": 6.852,
+  "tasks": 11.0
+ },
+ "vcu_period_sweep_yaw_ms": {
+  "A1": {
+   "2": Infinity,
+   "5": 13.492,
+   "10": 18.492,
+   "20": 28.492
+  },
+  "A2": {
+   "2": 13.692,
+   "5": 12.852,
+   "10": 17.852,
+   "20": 27.852
+  },
+  "A3": {
+   "2": 8.459,
+   "5": 10.773,
+   "10": 15.773,
+   "20": 25.773
+  }
+ },
+ "vcu_period_sweep_bw_load": {
+  "A1": {
+   "2": {
+    "load": 1.7094,
+    "misses": 62
+   },
+   "5": {
+    "load": 0.9414,
+    "misses": 13
+   },
+   "10": {
+    "load": 0.6854,
+    "misses": 4
+   },
+   "20": {
+    "load": 0.5574,
+    "misses": 2
+   }
+  },
+  "A2": {
+   "2": {
+    "load": 1.6032,
+    "misses": 16
+   },
+   "5": {
+    "load": 0.7392,
+    "misses": 3
+   },
+   "10": {
+    "load": 0.4512,
+    "misses": 0
+   },
+   "20": {
+    "load": 0.30720000000000003,
+    "misses": 0
+   }
+  },
+  "A3": {
+   "2": {
+    "load": 0.8592150000000001,
+    "misses": 12
+   },
+   "5": {
+    "load": 0.396165,
+    "misses": 0
+   },
+   "10": {
+    "load": 0.24181499999999997,
+    "misses": 0
+   },
+   "20": {
+    "load": 0.16463999999999998,
+    "misses": 0
+   }
+  }
+ }
+}

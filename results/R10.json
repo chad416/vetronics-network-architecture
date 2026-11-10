@@ -1,0 +1,157 @@
+{
+ "screen": {
+  "A0": [
+   "52 deadline misses with growth and errors (AMB, BCM_HATCH, BCM_LIGHT, C2_MODE...)",
+   "bus load above 80 % with growth",
+   "a single network fault (short, open, babbling node) removes steering"
+  ],
+  "A1": [
+   "4 deadline misses with growth and errors (G_NAV_POS, NAV_POS, TP_DT_EBS, TP_DT_ENG)",
+   "a single network fault (short, open, babbling node) removes steering"
+  ],
+  "A2": [],
+  "A3": [],
+  "A4": []
+ },
+ "raw": {
+  "A2": {
+   "timing": 0.2648954528507499,
+   "load": 0.4512,
+   "reliability": 3.072340208909452e-07,
+   "maturity": 9,
+   "integration": 5.0,
+   "cost": 1400,
+   "mass": 3.2,
+   "capacity": 0.7403816
+  },
+  "A3": {
+   "timing": 0.3505039198865605,
+   "load": 0.24181499999999997,
+   "reliability": 3.072340208909452e-07,
+   "maturity": 7,
+   "integration": 7.5,
+   "cost": 1700,
+   "mass": 3.2,
+   "capacity": 0.7403816
+  },
+  "A4": {
+   "timing": 0.43887681174709636,
+   "load": 0.0084784,
+   "reliability": 9.843490493821605e-07,
+   "maturity": 5,
+   "integration": 15.0,
+   "cost": 21000,
+   "mass": 9.5,
+   "capacity": 0.7403816
+  }
+ },
+ "utility": {
+  "A2": {
+   "timing": 0.4414924214179165,
+   "load": 0.5813333333333335,
+   "reliability": 0.2562653476615173,
+   "maturity": 1.0,
+   "integration": 0.75,
+   "cost": 0.944,
+   "mass": 0.7333333333333334,
+   "capacity": 0.7403816
+  },
+  "A3": {
+   "timing": 0.5841731998109342,
+   "load": 0.9303083333333334,
+   "reliability": 0.2562653476615173,
+   "maturity": 0.6,
+   "integration": 0.625,
+   "cost": 0.9319999999999999,
+   "mass": 0.7333333333333334,
+   "capacity": 0.7403816
+  },
+  "A4": {
+   "timing": 0.7314613529118273,
+   "load": 1.0,
+   "reliability": 0.0034254368917876477,
+   "maturity": 0.2,
+   "integration": 0.25,
+   "cost": 0.16000000000000003,
+   "mass": 0.20833333333333337,
+   "capacity": 0.7403816
+  }
+ },
+ "weights": {
+  "timing": 0.18,
+  "load": 0.14,
+  "reliability": 0.16,
+  "maturity": 0.16,
+  "integration": 0.12,
+  "cost": 0.1,
+  "mass": 0.06,
+  "capacity": 0.08
+ },
+ "fom": {
+  "A2": 0.6494882861477345,
+  "A3": 0.6438273262584776,
+  "A4": 0.42194164142681495
+ },
+ "leader": "A2",
+ "sensitivity": [
+  {
+   "criterion": "timing",
+   "winner": "A2"
+  },
+  {
+   "criterion": "load",
+   "winner": "A2"
+  },
+  {
+   "criterion": "reliability",
+   "winner": "A2"
+  },
+  {
+   "criterion": "maturity",
+   "winner": "A3"
+  },
+  {
+   "criterion": "integration",
+   "winner": "A2"
+  },
+  {
+   "criterion": "cost",
+   "winner": "A2"
+  },
+  {
+   "criterion": "mass",
+   "winner": "A2"
+  },
+  {
+   "criterion": "capacity",
+   "winner": "A2"
+  }
+ ],
+ "monte_carlo": {
+  "A2": 0.6005,
+  "A3": 0.3995,
+  "A4": 0.0
+ },
+ "crossover_rating": {
+  "A3": {
+   "timing": 11.0,
+   "load": 8.0,
+   "reliability": Infinity,
+   "maturity": 7.25,
+   "integration": 3.5,
+   "cost": Infinity,
+   "mass": Infinity,
+   "capacity": Infinity
+  },
+  "A4": {
+   "timing": Infinity,
+   "load": Infinity,
+   "reliability": Infinity,
+   "maturity": Infinity,
+   "integration": Infinity,
+   "cost": Infinity,
+   "mass": Infinity,
+   "capacity": Infinity
+  }
+ }
+}

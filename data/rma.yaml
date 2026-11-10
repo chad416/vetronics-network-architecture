@@ -1,0 +1,19 @@
+# Reliability of the steer-command path VCU -> steering actuators (DOSSIER section 12). Failure rates in FIT
+# (failures per 1e9 h) for a ground-mobile environment. All rates are assumed engineering values of the right
+# order for rugged automotive-grade parts; the study sweeps them x0.3..x10 because they dominate nothing else.
+mission_h: {value: 12, basis: assumed, note: "one long watch or road march"}
+annual_operating_h: {value: 600, basis: assumed}
+mttr_h: {value: 1.0, basis: assumed, note: "swap a harness section or an ECU in the field"}
+fit:
+  can_transceiver: {value: 25, basis: assumed}
+  can_controller_port: {value: 15, basis: assumed}
+  connector: {value: 40, basis: assumed, note: "one mated connector pair on the bus route"}
+  harness_segment: {value: 30, basis: assumed, note: "one backbone segment between two connectors (chafe, crush)"}
+  termination: {value: 5, basis: assumed}
+  eth_phy: {value: 40, basis: assumed}
+  eth_switch: {value: 1500, basis: assumed, note: "rugged managed switch incl. power supply"}
+  eth_cable: {value: 30, basis: assumed}
+bus_killer_fraction: {value: 0.2, basis: assumed, note: "share of transceiver/controller failures that hold the bus dominant or babble (they kill the whole channel); the rest only lose that node"}
+common_cause_beta: {value: 0.05, basis: assumed, src: [IEC61508-6], note: "beta-factor model; 1-10 % is the usual range for redundant channels sharing routing and environment"}
+connectors_per_channel: {value: 6, basis: assumed}
+segments_per_channel: {value: 5, basis: assumed}

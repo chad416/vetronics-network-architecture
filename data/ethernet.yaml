@@ -1,0 +1,34 @@
+# Open-architecture Ethernet backbone (DOSSIER section 8.5). Ports are named SRC>DST; a switch output port is
+# SW>DST. One switch (A2/A3); the by-wire planes of A4 are two more switches (SWA, SWB) carrying only control
+# traffic plus a copy of the inertial data. PCP = IEEE 802.1Q priority code point (7 highest) [IEEE8021Q].
+switch_latency_us: {value: 4.0, basis: assumed, note: "store-and-forward fabric latency of a rugged gigabit switch, excluding frame reception"}
+video:
+  bitrate_mbps: {value: 8.0, basis: assumed, note: "compressed 1080p30 situational-awareness camera"}
+  dve_bitrate_mbps: {value: 20.0, basis: assumed, note: "driver's-vision camera, low-latency encoding"}
+  i_frame_kB: {value: 150, basis: assumed, note: "largest intra-coded frame, sent back-to-back at the camera's link rate"}
+  gop: {value: 30, basis: assumed}
+  i_ratio: {value: 10, basis: assumed}
+  glass_to_glass_budget_ms: {value: 100, basis: assumed, note: "driver's-vision camera latency allowance (network share 10 ms)"}
+flows:   # all flow parameters are assumed (design traffic model, DOSSIER 8.5)
+  # name, path, pcp, and either periodic (period_ms, bytes) or bursty (rate_mbps, burst_kB)
+  - {name: CAM1,     path: [CAM1>SW, SW>CC],  pcp: 4, rate_mbps: 8,   burst_kB: 150, deadline_ms: 40}
+  - {name: CAM2,     path: [CAM2>SW, SW>CC],  pcp: 4, rate_mbps: 8,   burst_kB: 150, deadline_ms: 40}
+  - {name: CAM3,     path: [CAM3>SW, SW>CC],  pcp: 4, rate_mbps: 8,   burst_kB: 150, deadline_ms: 40}
+  - {name: CAM4,     path: [CAM4>SW, SW>CC],  pcp: 4, rate_mbps: 8,   burst_kB: 150, deadline_ms: 40}
+  - {name: DVE,      path: [DVE>SW, SW>CC],   pcp: 5, rate_mbps: 20,  burst_kB: 100, deadline_ms: 10}
+  - {name: INS_VCU,  path: [INS>SW, SW>VCU],  pcp: 6, period_ms: 10,  bytes: 256, deadline_ms: 1}
+  - {name: INS_C4I,  path: [INS>SW, SW>C4I],  pcp: 6, period_ms: 100, bytes: 512, deadline_ms: 10}
+  - {name: VCU_STAT, path: [VCU>SW, SW>CC],   pcp: 6, period_ms: 20,  bytes: 256, deadline_ms: 10}
+  - {name: C2_CMD,   path: [CC>SW, SW>VCU],   pcp: 6, period_ms: 100, bytes: 128, deadline_ms: 10}
+  - {name: BULK,     path: [C4I>SW, SW>CC],   pcp: 0, rate_mbps: 200, burst_kB: 64,  deadline_ms: 1000}
+  - {name: RADIO_IP, path: [RAD>SW, SW>C4I],  pcp: 3, rate_mbps: 2,   burst_kB: 16,  deadline_ms: 100}
+  - {name: TELEOP,   path: [CC>SW, SW>RAD],   pcp: 4, rate_mbps: 4,   burst_kB: 60,  deadline_ms: 40}
+  - {name: HUMS,     path: [HUMS>SW, SW>C4I], pcp: 1, rate_mbps: 1,   burst_kB: 8,   deadline_ms: 1000}
+  - {name: GW_CAN,   path: [GW>SW, SW>CC],    pcp: 5, period_ms: 10,  bytes: 512, deadline_ms: 10}
+bywire_flows:   # A4 only: by-wire control on the two control planes (each flow duplicated on SWA and SWB)
+  - {name: STEER_CMD_E, path: [VCU>SWA, SWA>SAS], pcp: 7, period_ms: 10, bytes: 64,  deadline_ms: 1}
+  - {name: SAS_STAT_E,  path: [SAS>SWA, SWA>VCU], pcp: 7, period_ms: 10, bytes: 64,  deadline_ms: 1}
+  - {name: DRIVER_E,    path: [DCU>SWA, SWA>VCU], pcp: 7, period_ms: 10, bytes: 64,  deadline_ms: 1}
+  - {name: INS_DYN_E,   path: [INS>SWA, SWA>VCU], pcp: 7, period_ms: 10, bytes: 64,  deadline_ms: 1}
+  - {name: BRAKE_E,     path: [VCU>SWA, SWA>EBS], pcp: 7, period_ms: 10, bytes: 64,  deadline_ms: 1}
+  - {name: SA_COPY,     path: [CAMX>SWA, SWA>VCU], pcp: 4, rate_mbps: 8, burst_kB: 150, deadline_ms: 40, note: "a camera copy for the autonomy kit shares the plane"}

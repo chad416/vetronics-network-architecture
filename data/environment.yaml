@@ -1,0 +1,19 @@
+# Electromagnetic and fault environment of the networks (DOSSIER section 8.3).
+can_error_model:
+  n_burst: {value: 2, basis: assumed, note: "two consecutive errors from one transient (e.g. a radio transmit key-up or a MIL-STD-1275 surge edge)"}
+  t_err_ms: {value: 10, basis: assumed, note: "one sporadic error every 10 ms: far above the 1e-11..1e-6 bit error rates reported in DAVIS2007 p. 261 (FERREIRA2004), i.e. a deliberately harsh tracked/wheeled-vehicle EMI case"}
+ber_range: {value: [1.0e-11, 1.0e-6], basis: sourced, src: [DAVIS2007], note: "bit error rates on CAN depending on environment, p. 261"}
+error_frame_bits_max: {value: 31, basis: sourced, src: [DAVIS2007], note: "error frame 17-31 bits, p. 245"}
+fault_confinement:
+  tec_tx_error: {value: 8, basis: sourced, src: [CAN20], note: "Part A p. 24-26 rules 3-4"}
+  tec_tx_ok: {value: -1, basis: sourced, src: [CAN20]}
+  error_passive_at: {value: 128, basis: sourced, src: [CAN20]}
+  bus_off_at: {value: 256, basis: sourced, src: [CAN20]}
+  recovery_sequences: {value: 128, basis: sourced, src: [CAN20], note: "128 occurrences of 11 consecutive recessive bits"}
+  recovery_bits_each: {value: 11, basis: sourced, src: [CAN20]}
+  app_recovery_delay_ms: {value: 100, basis: assumed, note: "application waits before re-enabling a node after bus-off (avoids oscillating bus-off)"}
+e2e:
+  timeout_periods: {value: 3, basis: assumed, note: "a channel is declared lost after 3 missed periods"}
+  max_delta_counter: {value: 2, basis: assumed, note: "up to one lost frame tolerated as OKSOMELOST"}
+  counter_range: {value: 15, basis: sourced, src: [AUTOSAR-E2E], note: "4-bit counter 0..14, Profile 1"}
+  crc_poly: {value: 0x1D, basis: sourced, src: [AUTOSAR-E2E], note: "CRC-8-SAE J1850, start and XOR value 0x00 in Profile 1"}

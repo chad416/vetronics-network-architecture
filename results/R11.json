@@ -1,0 +1,54 @@
+{
+ "rows": [
+  {
+   "bps": 125000,
+   "arbitration_limit_m": 598.0
+  },
+  {
+   "bps": 250000,
+   "arbitration_limit_m": 278.0
+  },
+  {
+   "bps": 500000,
+   "arbitration_limit_m": 118.0
+  },
+  {
+   "bps": 1000000,
+   "arbitration_limit_m": 38.0
+  }
+ ],
+ "j1939": {
+  "J1939_11": {
+   "bps": 250000,
+   "max_bus_m": 40,
+   "max_stub_m": 1,
+   "max_nodes": 30,
+   "basis": "sourced",
+   "src": [
+    "J1939PHY"
+   ]
+  },
+  "J1939_15": {
+   "bps": 250000,
+   "max_bus_m": 40,
+   "max_stub_m": 3,
+   "max_nodes": 10,
+   "basis": "sourced",
+   "src": [
+    "J1939PHY"
+   ]
+  },
+  "J1939_14": {
+   "bps": 500000,
+   "max_bus_m": 30,
+   "max_stub_m": 1,
+   "max_nodes": 30,
+   "basis": "sourced",
+   "src": [
+    "J1939PHY"
+   ],
+   "note": "30 m and 30 nodes from a secondary source only"
+  }
+ },
+ "harness_m": 22
+}

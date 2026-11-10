@@ -1,0 +1,85 @@
+# CAN message set of the reference drive-by-wire command vehicle (the ICD, DOSSIER section 7.3).
+# Standard J1939 parameter groups keep their PGN; vehicle-specific by-wire groups use proprietary PGNs
+# (PropA 0xEF00 peer-to-peer, PropB 0xFF00-0xFFFF broadcast). Repetition rates from the published fleet-management
+# gateway specification are tagged sourced [FMS2010]; the rest are design choices (assumed). Priority 0 is the
+# highest J1939 priority. Every frame is a 29-bit extended frame.
+#
+# domain: bw = by-wire (steer, brake, throttle, vehicle dynamics), pt = powertrain, body = chassis and body
+# (tyre inflation, power management, lights, hatches, CBRN), diag = diagnostics and transport protocol,
+# gw = gatewayed from the Ethernet backbone.
+# e2e: the frame carries a CRC-8 + 4-bit counter E2E header (Profile-1 style) inside its 8 bytes.
+
+defaults:
+  jitter_ms: {bw: 1.0, pt: 2.0, body: 5.0, diag: 10.0, gw: 2.0}
+  basis_jitter: assumed
+  note_jitter: "queuing jitter = release-to-queue variation of the sending task; gw adds the Ethernet bound at run time"
+
+nodes:            # J1939 source addresses (assumed allocation)
+  ENG: 0x00
+  TCU: 0x03
+  EBS: 0x0B
+  SAS1: 0x13
+  SAS2: 0x14
+  DCU: 0x17       # driver controls: hand-wheel angle sensor + feedback motor, pedals
+  INS: 0x1C       # inertial unit (yaw rate, accelerations)
+  BCM: 0x21
+  GW: 0x25
+  VCU: 0x27       # drive-by-wire vehicle control unit
+  CTIS: 0x33
+  PMC: 0x45       # power-management controller (SSPC panel)
+  HUMS: 0x4A
+
+messages:
+  # --- by-wire ------------------------------------------------------------------------------------
+  - {name: STEER_CMD,   pgn: 0xEF00, prio: 1, sa: VCU,  da: 0xFF, bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed, note: "road-wheel angle set-points axle 1 and 2, rate limit, mode"}
+  - {name: DRIVER_IN,   pgn: 0xFF02, prio: 1, sa: DCU,  bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed, note: "hand-wheel angle and rate, pedal positions"}
+  - {name: BRAKE_CMD,   pgn: 0x0400, prio: 2, sa: VCU,  da: 0x0B, bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed, note: "XBR layout (external brake request), 10 ms for by-wire"}
+  - {name: TSC1_ENG,    pgn: 0x0000, prio: 2, sa: VCU,  da: 0x00, bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed, note: "torque/speed control request"}
+  - {name: INS_DYN,     pgn: 0xF009, prio: 2, sa: INS,  bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed, note: "VDC2 layout: yaw rate, lateral and longitudinal acceleration"}
+  - {name: SAS1_STAT,   pgn: 0xFF10, prio: 3, sa: SAS1, bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed, note: "axle-1 actual angle, rack force, faults"}
+  - {name: SAS2_STAT,   pgn: 0xFF11, prio: 3, sa: SAS2, bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed}
+  - {name: WSPD_1,      pgn: 0xFF20, prio: 3, sa: EBS,  bytes: 8, period_ms: 10, domain: bw, e2e: false, basis: assumed, note: "wheel speeds 1-4"}
+  - {name: WSPD_2,      pgn: 0xFF21, prio: 3, sa: EBS,  bytes: 8, period_ms: 10, domain: bw, e2e: false, basis: assumed, note: "wheel speeds 5-8"}
+  - {name: FFB_CMD,     pgn: 0xEF00, prio: 3, sa: VCU,  da: 0x17, bytes: 8, period_ms: 10, domain: bw, e2e: true, basis: assumed, note: "hand-wheel feedback torque set-point"}
+  - {name: EBS_STAT,    pgn: 0xFF22, prio: 3, sa: EBS,  bytes: 8, period_ms: 20, domain: bw, e2e: true, basis: assumed, note: "brake pressures per axle, ABS state"}
+  - {name: VCU_STAT,    pgn: 0xFF01, prio: 3, sa: VCU,  bytes: 8, period_ms: 20, domain: bw, e2e: true, basis: assumed, note: "drive mode, degraded-mode flags, heartbeat"}
+  - {name: EBC1,        pgn: 0xF001, prio: 6, sa: EBS,  bytes: 8, period_ms: 100, domain: bw, e2e: false, basis: assumed}
+  # --- powertrain ---------------------------------------------------------------------------------
+  - {name: ETC1,        pgn: 0xF002, prio: 3, sa: TCU,  bytes: 8, period_ms: 10, domain: pt, e2e: false, basis: assumed}
+  - {name: EEC1,        pgn: 0xF004, prio: 3, sa: ENG,  bytes: 8, period_ms: 20, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: EEC2,        pgn: 0xF003, prio: 3, sa: ENG,  bytes: 8, period_ms: 50, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: ETC2,        pgn: 0xF005, prio: 6, sa: TCU,  bytes: 8, period_ms: 100, domain: pt, e2e: false, basis: assumed}
+  - {name: CCVS,        pgn: 0xFEF1, prio: 6, sa: VCU,  bytes: 8, period_ms: 100, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: LFE,         pgn: 0xFEF2, prio: 6, sa: ENG,  bytes: 8, period_ms: 100, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: ET1,         pgn: 0xFEEE, prio: 6, sa: ENG,  bytes: 8, period_ms: 1000, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: AMB,         pgn: 0xFEF5, prio: 6, sa: ENG,  bytes: 8, period_ms: 1000, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: HOURS,       pgn: 0xFEE5, prio: 6, sa: ENG,  bytes: 8, period_ms: 1000, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: LFC,         pgn: 0xFEE9, prio: 6, sa: ENG,  bytes: 8, period_ms: 1000, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: DD,          pgn: 0xFEFC, prio: 6, sa: BCM,  bytes: 8, period_ms: 1000, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  - {name: VDHR,        pgn: 0xFEC1, prio: 6, sa: VCU,  bytes: 8, period_ms: 1000, domain: pt, e2e: false, basis: sourced, src: [FMS2010]}
+  # --- chassis and body ---------------------------------------------------------------------------
+  - {name: CTIS_CMD,    pgn: 0xFF30, prio: 5, sa: VCU,  bytes: 8, period_ms: 100, domain: body, e2e: false, basis: assumed, note: "tyre-pressure set-point per axle"}
+  - {name: CTIS_STAT,   pgn: 0xFF31, prio: 5, sa: CTIS, bytes: 8, period_ms: 100, domain: body, e2e: false, basis: assumed}
+  - {name: TIRE,        pgn: 0xFEF4, prio: 6, sa: CTIS, bytes: 8, period_ms: 1000, domain: body, e2e: false, basis: sourced, src: [FMS2010], note: "one axle per repetition"}
+  - {name: PMC_STAT,    pgn: 0xFF40, prio: 5, sa: PMC,  bytes: 8, period_ms: 100, domain: body, e2e: false, basis: assumed, note: "bus voltage, shed level, SOC"}
+  - {name: PMC_SSPC,    pgn: 0xFF41, prio: 5, sa: PMC,  bytes: 8, period_ms: 100, domain: body, e2e: false, basis: assumed, note: "16 channel states"}
+  - {name: PMC_CMD,     pgn: 0xFF42, prio: 5, sa: VCU,  bytes: 8, period_ms: 100, domain: body, e2e: false, basis: assumed}
+  - {name: BCM_LIGHT,   pgn: 0xFF50, prio: 6, sa: BCM,  bytes: 8, period_ms: 100, domain: body, e2e: false, basis: assumed}
+  - {name: BCM_HATCH,   pgn: 0xFF51, prio: 6, sa: BCM,  bytes: 8, period_ms: 500, domain: body, e2e: false, basis: assumed}
+  - {name: CBRN_STAT,   pgn: 0xFF52, prio: 4, sa: BCM,  bytes: 8, period_ms: 500, domain: body, e2e: false, basis: assumed}
+  - {name: PMC_BATT,    pgn: 0xFF43, prio: 6, sa: PMC,  bytes: 8, period_ms: 1000, domain: body, e2e: false, basis: assumed}
+  # --- diagnostics ---------------------------------------------------------------------------------
+  - {name: DM1_ENG,     pgn: 0xFECA, prio: 6, sa: ENG,  bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed, note: "active DTCs once per second"}
+  - {name: DM1_TCU,     pgn: 0xFECA, prio: 6, sa: TCU,  bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed}
+  - {name: DM1_EBS,     pgn: 0xFECA, prio: 6, sa: EBS,  bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed}
+  - {name: DM1_VCU,     pgn: 0xFECA, prio: 6, sa: VCU,  bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed}
+  - {name: DM1_SAS1,    pgn: 0xFECA, prio: 6, sa: SAS1, bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed}
+  - {name: DM1_SAS2,    pgn: 0xFECA, prio: 6, sa: SAS2, bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed}
+  - {name: DM1_CTIS,    pgn: 0xFECA, prio: 6, sa: CTIS, bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed}
+  - {name: DM1_PMC,     pgn: 0xFECA, prio: 6, sa: PMC,  bytes: 8, period_ms: 1000, domain: diag, e2e: false, basis: assumed}
+  - {name: TP_DT_ENG,   pgn: 0xEB00, prio: 7, sa: ENG,  da: 0xFF, bytes: 8, period_ms: 50, domain: diag, e2e: false, basis: assumed, note: "BAM of a multi-DTC DM1, packets 50 ms apart (the J1939-21 lower limit as reported in J1939TP)"}
+  - {name: TP_DT_EBS,   pgn: 0xEB00, prio: 7, sa: EBS,  da: 0xFF, bytes: 8, period_ms: 50, domain: diag, e2e: false, basis: assumed}
+  - {name: HUMS_REQ,    pgn: 0xEA00, prio: 6, sa: HUMS, da: 0xFF, bytes: 3, period_ms: 100, domain: diag, e2e: false, basis: assumed, note: "request PGN polling by the health monitor"}
+  # --- gatewayed from the Ethernet backbone (exists on CAN only when the VCU has no Ethernet port) ---
+  - {name: NAV_POS,     pgn: 0xFF60, prio: 3, sa: GW,   bytes: 8, period_ms: 10, domain: gw, e2e: true, basis: assumed, note: "position and heading from the navigation system for path following"}
+  - {name: C2_MODE,     pgn: 0xFF61, prio: 5, sa: GW,   bytes: 8, period_ms: 100, domain: gw, e2e: false, basis: assumed, note: "crew-station mode commands"}

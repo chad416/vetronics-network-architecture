@@ -1,0 +1,65 @@
+# Candidate network architectures (DOSSIER section 6.1). Every bus lists the message domains it carries;
+# `move` re-allocates single messages; `dual: true` means two identical, independent channels (A and B).
+# Bit rates and physical layers: J1939-11/-15 250 kbit/s, J1939-14 500 kbit/s, J1939-22 CAN FD 500 kbit/s
+# arbitration / 2 Mbit/s data [J1939PHY, J1939-22]. Ethernet 100BASE-TX or 1000BASE-T as allowed by the
+# open-architecture standard's data infrastructure [COS599905, AEP4754].
+
+growth: {value: 0.30, basis: assumed, note: "message-count growth over life (new by-wire and HUMS functions); applied by cloning every third message just below its priority"}
+max_design_load: {value: 0.80, basis: derived, src: [DAVIS2007], note: "about 80 % is what analysis-based design reaches in practice (DAVIS2007 p. 243); used as the hard load ceiling with growth"}
+gateway_task_ms: {value: 5.0, basis: assumed, note: "gateway forwarding task period (adds to the jitter of gatewayed frames)"}
+
+architectures:
+  A0:
+    name: "Legacy: one J1939 bus, 250 kbit/s"
+    buses:
+      - {id: J1939, kind: can, bps: 250000, domains: [bw, pt, body, diag, gw]}
+    ethernet_mbps: 100
+    vcu_on_ethernet: false
+    bywire_redundant: false
+  A1:
+    name: "One J1939 bus, 500 kbit/s"
+    buses:
+      - {id: J1939, kind: can, bps: 500000, domains: [bw, pt, body, diag, gw]}
+    ethernet_mbps: 100
+    vcu_on_ethernet: false
+    bywire_redundant: false
+  A2:
+    name: "Partitioned: dual 500k by-wire CAN + 250k powertrain + 250k body + 1 Gbit/s backbone"
+    buses:
+      - {id: BW, kind: can, bps: 500000, domains: [bw], dual: true}
+      - {id: PT, kind: can, bps: 250000, domains: [pt]}
+      - {id: BODY, kind: can, bps: 250000, domains: [body, diag]}
+    move: {TSC1_ENG: PT, DM1_ENG: PT, DM1_TCU: PT, TP_DT_ENG: PT}
+    ethernet_mbps: 1000
+    vcu_on_ethernet: true
+    bywire_redundant: true
+  A3:
+    name: "Partitioned with CAN FD: dual 500k/2M by-wire FD + 250k powertrain + 250k body + 1 Gbit/s backbone"
+    buses:
+      - {id: BW, kind: canfd, bps: 500000, data_bps: 2000000, domains: [bw], dual: true}
+      - {id: PT, kind: can, bps: 250000, domains: [pt]}
+      - {id: BODY, kind: can, bps: 250000, domains: [body, diag]}
+    move: {TSC1_ENG: PT, DM1_ENG: PT, DM1_TCU: PT, TP_DT_ENG: PT}
+    ethernet_mbps: 1000
+    vcu_on_ethernet: true
+    bywire_redundant: true
+  A4:
+    name: "By-wire on redundant 1 Gbit/s Ethernet (TSN, two planes); legacy J1939 kept for powertrain and body"
+    buses:
+      - {id: PT, kind: can, bps: 250000, domains: [pt]}
+      - {id: BODY, kind: can, bps: 250000, domains: [body, diag]}
+    move: {TSC1_ENG: PT, DM1_ENG: PT, DM1_TCU: PT, TP_DT_ENG: PT, EBC1: PT, WSPD_1: PT}
+    ethernet_mbps: 1000
+    vcu_on_ethernet: true
+    bywire_on_ethernet: true
+    bywire_redundant: true
+
+# Physical-layer limits used in the screening (DOSSIER section 8.4)
+phy:
+  J1939_11: {bps: 250000, max_bus_m: 40, max_stub_m: 1, max_nodes: 30, basis: sourced, src: [J1939PHY]}
+  J1939_15: {bps: 250000, max_bus_m: 40, max_stub_m: 3, max_nodes: 10, basis: sourced, src: [J1939PHY]}
+  J1939_14: {bps: 500000, max_bus_m: 30, max_stub_m: 1, max_nodes: 30, basis: sourced, src: [J1939PHY], note: "30 m and 30 nodes from a secondary source only"}
+  propagation_ns_per_m: {value: 5.0, basis: assumed, note: "twisted pair, about 0.66 c"}
+  node_loop_delay_ns: {value: 210, basis: assumed, note: "transceiver + controller loop delay, both directions of one node"}
+  sample_point: {value: 0.80, basis: assumed}
+reference_harness_m: {value: 22, basis: assumed, note: "longest backbone route of an 8x8 hull, front hand-wheel to rear bogie, with routing allowances"}

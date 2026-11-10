@@ -1,0 +1,396 @@
+{
+ "A2_BW_growth": {
+  "bps": 500000,
+  "rows": [
+   {
+    "msg": "STEER_CMD",
+    "bound_ms": 1.64,
+    "critical_instant_ms": 1.639999,
+    "random_max_ms": 1.512165
+   },
+   {
+    "msg": "G_STEER_CMD",
+    "bound_ms": 1.96,
+    "critical_instant_ms": 1.959999,
+    "random_max_ms": 1.5187
+   },
+   {
+    "msg": "DRIVER_IN",
+    "bound_ms": 2.28,
+    "critical_instant_ms": 2.279999,
+    "random_max_ms": 1.740546
+   },
+   {
+    "msg": "BRAKE_CMD",
+    "bound_ms": 2.6,
+    "critical_instant_ms": 2.599999,
+    "random_max_ms": 1.735006
+   },
+   {
+    "msg": "INS_DYN",
+    "bound_ms": 2.92,
+    "critical_instant_ms": 2.919999,
+    "random_max_ms": 1.708491
+   },
+   {
+    "msg": "G_INS_DYN",
+    "bound_ms": 3.24,
+    "critical_instant_ms": 3.239999,
+    "random_max_ms": 1.737206
+   },
+   {
+    "msg": "FFB_CMD",
+    "bound_ms": 3.56,
+    "critical_instant_ms": 3.559999,
+    "random_max_ms": 1.745934
+   },
+   {
+    "msg": "VCU_STAT",
+    "bound_ms": 3.88,
+    "critical_instant_ms": 3.879999,
+    "random_max_ms": 1.640255
+   },
+   {
+    "msg": "SAS1_STAT",
+    "bound_ms": 4.2,
+    "critical_instant_ms": 4.199999,
+    "random_max_ms": 2.255038
+   },
+   {
+    "msg": "G_SAS1_STAT",
+    "bound_ms": 4.52,
+    "critical_instant_ms": 4.519999,
+    "random_max_ms": 2.46346
+   },
+   {
+    "msg": "SAS2_STAT",
+    "bound_ms": 4.84,
+    "critical_instant_ms": 4.839999,
+    "random_max_ms": 1.844218
+   },
+   {
+    "msg": "WSPD_1",
+    "bound_ms": 5.16,
+    "critical_instant_ms": 5.159999,
+    "random_max_ms": 2.125791
+   },
+   {
+    "msg": "WSPD_2",
+    "bound_ms": 5.48,
+    "critical_instant_ms": 5.479999,
+    "random_max_ms": 2.033032
+   },
+   {
+    "msg": "G_WSPD_2",
+    "bound_ms": 5.8,
+    "critical_instant_ms": 5.799999,
+    "random_max_ms": 1.642764
+   },
+   {
+    "msg": "EBS_STAT",
+    "bound_ms": 6.12,
+    "critical_instant_ms": 6.119999,
+    "random_max_ms": 2.014812
+   },
+   {
+    "msg": "EBC1",
+    "bound_ms": 6.12,
+    "critical_instant_ms": 6.12,
+    "random_max_ms": 2.069805
+   }
+  ]
+ },
+ "A1_J1939": {
+  "bps": 500000,
+  "rows": [
+   {
+    "msg": "STEER_CMD",
+    "bound_ms": 1.64,
+    "critical_instant_ms": 1.639999,
+    "random_max_ms": 1.514009
+   },
+   {
+    "msg": "DRIVER_IN",
+    "bound_ms": 1.96,
+    "critical_instant_ms": 1.959999,
+    "random_max_ms": 1.519587
+   },
+   {
+    "msg": "TSC1_ENG",
+    "bound_ms": 2.28,
+    "critical_instant_ms": 2.279999,
+    "random_max_ms": 1.508789
+   },
+   {
+    "msg": "BRAKE_CMD",
+    "bound_ms": 2.6,
+    "critical_instant_ms": 2.599999,
+    "random_max_ms": 1.773966
+   },
+   {
+    "msg": "INS_DYN",
+    "bound_ms": 2.92,
+    "critical_instant_ms": 2.919999,
+    "random_max_ms": 1.685583
+   },
+   {
+    "msg": "FFB_CMD",
+    "bound_ms": 3.24,
+    "critical_instant_ms": 3.239999,
+    "random_max_ms": 1.783813
+   },
+   {
+    "msg": "ETC1",
+    "bound_ms": 4.56,
+    "critical_instant_ms": 4.559999,
+    "random_max_ms": 2.700618
+   },
+   {
+    "msg": "EEC2",
+    "bound_ms": 4.88,
+    "critical_instant_ms": 4.879999,
+    "random_max_ms": 2.61368
+   },
+   {
+    "msg": "EEC1",
+    "bound_ms": 5.2,
+    "critical_instant_ms": 5.199999,
+    "random_max_ms": 2.650406
+   },
+   {
+    "msg": "VCU_STAT",
+    "bound_ms": 4.52,
+    "critical_instant_ms": 4.519999,
+    "random_max_ms": 1.874293
+   },
+   {
+    "msg": "SAS1_STAT",
+    "bound_ms": 4.84,
+    "critical_instant_ms": 4.839999,
+    "random_max_ms": 1.793149
+   },
+   {
+    "msg": "SAS2_STAT",
+    "bound_ms": 5.16,
+    "critical_instant_ms": 5.159999,
+    "random_max_ms": 1.956574
+   },
+   {
+    "msg": "WSPD_1",
+    "bound_ms": 5.48,
+    "critical_instant_ms": 5.479999,
+    "random_max_ms": 2.026665
+   },
+   {
+    "msg": "WSPD_2",
+    "bound_ms": 5.8,
+    "critical_instant_ms": 5.799999,
+    "random_max_ms": 2.08838
+   },
+   {
+    "msg": "EBS_STAT",
+    "bound_ms": 6.12,
+    "critical_instant_ms": 6.119999,
+    "random_max_ms": 1.914969
+   },
+   {
+    "msg": "NAV_POS",
+    "bound_ms": 12.44,
+    "critical_instant_ms": 12.439999,
+    "random_max_ms": 8.264344
+   },
+   {
+    "msg": "CBRN_STAT",
+    "bound_ms": 11.08,
+    "critical_instant_ms": 11.079999,
+    "random_max_ms": 5.262138
+   },
+   {
+    "msg": "CTIS_CMD",
+    "bound_ms": 11.4,
+    "critical_instant_ms": 11.399999,
+    "random_max_ms": 6.338089
+   },
+   {
+    "msg": "CTIS_STAT",
+    "bound_ms": 11.72,
+    "critical_instant_ms": 11.719999,
+    "random_max_ms": 6.250949
+   },
+   {
+    "msg": "PMC_STAT",
+    "bound_ms": 12.04,
+    "critical_instant_ms": 12.039999,
+    "random_max_ms": 5.898513
+   },
+   {
+    "msg": "PMC_SSPC",
+    "bound_ms": 12.36,
+    "critical_instant_ms": 12.359999,
+    "random_max_ms": 5.26922
+   },
+   {
+    "msg": "PMC_CMD",
+    "bound_ms": 12.68,
+    "critical_instant_ms": 12.679999,
+    "random_max_ms": 6.177408
+   },
+   {
+    "msg": "C2_MODE",
+    "bound_ms": 15.0,
+    "critical_instant_ms": 14.999999,
+    "random_max_ms": 8.291715
+   },
+   {
+    "msg": "HUMS_REQ",
+    "bound_ms": 18.54,
+    "critical_instant_ms": 18.219999,
+    "random_max_ms": 10.204416
+   },
+   {
+    "msg": "EBC1",
+    "bound_ms": 9.86,
+    "critical_instant_ms": 9.859999,
+    "random_max_ms": 1.949624
+   },
+   {
+    "msg": "ETC2",
+    "bound_ms": 11.18,
+    "critical_instant_ms": 11.179999,
+    "random_max_ms": 2.542336
+   },
+   {
+    "msg": "VDHR",
+    "bound_ms": 14.7,
+    "critical_instant_ms": 14.699999,
+    "random_max_ms": 2.946433
+   },
+   {
+    "msg": "DM1_ENG",
+    "bound_ms": 23.02,
+    "critical_instant_ms": 23.019999,
+    "random_max_ms": 9.318329
+   },
+   {
+    "msg": "DM1_TCU",
+    "bound_ms": 23.66,
+    "critical_instant_ms": 23.659999,
+    "random_max_ms": 9.557127
+   },
+   {
+    "msg": "DM1_EBS",
+    "bound_ms": 23.98,
+    "critical_instant_ms": 23.979999,
+    "random_max_ms": 10.884775
+   },
+   {
+    "msg": "DM1_SAS1",
+    "bound_ms": 24.3,
+    "critical_instant_ms": 24.299999,
+    "random_max_ms": 10.073894
+   },
+   {
+    "msg": "DM1_SAS2",
+    "bound_ms": 24.62,
+    "critical_instant_ms": 24.619999,
+    "random_max_ms": 9.659495
+   },
+   {
+    "msg": "DM1_VCU",
+    "bound_ms": 24.94,
+    "critical_instant_ms": 24.939999,
+    "random_max_ms": 7.23055
+   },
+   {
+    "msg": "DM1_CTIS",
+    "bound_ms": 25.26,
+    "critical_instant_ms": 25.259999,
+    "random_max_ms": 9.110619
+   },
+   {
+    "msg": "DM1_PMC",
+    "bound_ms": 25.58,
+    "critical_instant_ms": 25.579999,
+    "random_max_ms": 9.669426
+   },
+   {
+    "msg": "HOURS",
+    "bound_ms": 17.9,
+    "critical_instant_ms": 17.899999,
+    "random_max_ms": 2.261594
+   },
+   {
+    "msg": "LFC",
+    "bound_ms": 18.22,
+    "critical_instant_ms": 18.219999,
+    "random_max_ms": 2.208251
+   },
+   {
+    "msg": "ET1",
+    "bound_ms": 18.54,
+    "critical_instant_ms": 18.539999,
+    "random_max_ms": 2.274632
+   },
+   {
+    "msg": "CCVS",
+    "bound_ms": 18.86,
+    "critical_instant_ms": 18.859999,
+    "random_max_ms": 3.665851
+   },
+   {
+    "msg": "LFE",
+    "bound_ms": 19.18,
+    "critical_instant_ms": 19.179999,
+    "random_max_ms": 3.239315
+   },
+   {
+    "msg": "TIRE",
+    "bound_ms": 22.5,
+    "critical_instant_ms": 22.499999,
+    "random_max_ms": 3.835483
+   },
+   {
+    "msg": "AMB",
+    "bound_ms": 19.82,
+    "critical_instant_ms": 19.819999,
+    "random_max_ms": 2.284217
+   },
+   {
+    "msg": "DD",
+    "bound_ms": 20.14,
+    "critical_instant_ms": 20.139999,
+    "random_max_ms": 3.254913
+   },
+   {
+    "msg": "PMC_BATT",
+    "bound_ms": 24.1,
+    "critical_instant_ms": 24.099999,
+    "random_max_ms": 3.743189
+   },
+   {
+    "msg": "BCM_LIGHT",
+    "bound_ms": 28.26,
+    "critical_instant_ms": 28.259999,
+    "random_max_ms": 5.969655
+   },
+   {
+    "msg": "BCM_HATCH",
+    "bound_ms": 28.9,
+    "critical_instant_ms": 28.899999,
+    "random_max_ms": 5.814432
+   },
+   {
+    "msg": "TP_DT_ENG",
+    "bound_ms": 34.22,
+    "critical_instant_ms": 34.219999,
+    "random_max_ms": 11.052929
+   },
+   {
+    "msg": "TP_DT_EBS",
+    "bound_ms": 34.22,
+    "critical_instant_ms": 34.22,
+    "random_max_ms": 10.249035
+   }
+  ]
+ }
+}

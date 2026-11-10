@@ -1,0 +1,43 @@
+# Cause-effect chains (DOSSIER section 8.6). Budgets are set at run time from the loop analysis: the network
+# chain may use at most `budget_share` of the delay that leaves the loop 30 deg of phase margin (section 8.2).
+budget_share: {value: 0.5, basis: assumed, src: [W2016], note: "half the tolerable delay is held as margin (Principle 31.1: budgets with a safety margin)"}
+ethernet_stack_ms: {value: 0.3, basis: assumed, note: "UDP/middleware send + receive latency on a rugged single-board computer"}
+design_speed_kmh: {value: 120, basis: assumed, note: "the yaw loop has least delay margin at top speed"}
+chains:
+  YAW:        # loop L2: yaw-rate stabilisation
+    loop: yaw
+    hops:
+      - {msg: INS_DYN, eth: INS_DYN_E}
+      - {task: VCU, period_ms: 10}
+      - {msg: STEER_CMD, eth: STEER_CMD_E}
+      - {task: SAS, period_ms: 1}
+  ACT_CENTRAL:  # loop L1 if the position loop were closed by the VCU (not the selected design)
+    loop: actuator
+    hops:
+      - {msg: SAS1_STAT, eth: SAS_STAT_E}
+      - {task: VCU, period_ms: 10}
+      - {msg: STEER_CMD, eth: STEER_CMD_E}
+      - {task: SAS, period_ms: 1}
+  PATH:       # loop L3: path following from the navigation solution
+    loop: path
+    hops:
+      - {msg: NAV_POS, eth_if_vcu: INS_VCU}
+      - {task: VCU, period_ms: 10}
+      - {msg: STEER_CMD, eth: STEER_CMD_E}
+      - {task: SAS, period_ms: 1}
+  DRIVER_STEER:
+    loop: driver
+    budget_ms: 50
+    hops:
+      - {msg: DRIVER_IN, eth: DRIVER_E}
+      - {task: VCU, period_ms: 10}
+      - {msg: STEER_CMD, eth: STEER_CMD_E}
+      - {task: SAS, period_ms: 1}
+  DRIVER_BRAKE:
+    loop: driver
+    budget_ms: 50
+    hops:
+      - {msg: DRIVER_IN, eth: DRIVER_E}
+      - {task: VCU, period_ms: 10}
+      - {msg: BRAKE_CMD, eth: BRAKE_E}
+      - {task: EBS, period_ms: 5}

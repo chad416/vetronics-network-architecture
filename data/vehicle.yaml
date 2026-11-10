@@ -1,0 +1,36 @@
+# Reference vehicle for the lateral-dynamics link (DOSSIER section 8.2). An 8x8 wheeled armoured vehicle of
+# the 20-33 t class with the first two axles steered. Every value: basis sourced (S) / derived (D) / assumed (A),
+# src keys resolve in references.yaml.
+
+mass_kg: {value: 25000, basis: assumed, note: "combat mass, middle of the 8x8 class; swept 20-33 t"}
+axle_pos_from_front_m: {value: [0.0, 1.45, 3.50, 4.95], basis: assumed, note: "axle spacing typical of 8x8 hulls about 7.5-8 m long"}
+axle_load_share: {value: [0.26, 0.26, 0.24, 0.24], basis: assumed, note: "engine forward; hydro-pneumatic suspension evens the bogie"}
+yaw_radius_of_gyration_m: {value: 2.1, basis: assumed, note: "0.27 x 7.8 m hull length; the tractor in CHALMERS2013 gives 1.43 m on ~6 m"}
+steered_axles: {value: [0, 1], basis: assumed}
+cornering_coeff_per_rad:
+  value: 5.9
+  basis: derived
+  src: [CHALMERS2013]
+  note: "front-axle cornering stiffness 4.07e5 N/rad over its static load 69.2 kN (tractor 9841 kg, a=1.45, b=2.23 m, plus 7.6 % of the 14.3 t kingpin load), Table B.1; swept 4-8"
+steer_compliance_factor: {value: 0.8, basis: assumed, note: "steering-system compliance lowers the effective stiffness of steered axles (gives understeer); swept 0.7-1.0"}
+actuator_bandwidth_hz: {value: 3.0, basis: assumed, note: "closed-loop electro-hydraulic road-wheel actuator; swept 1.5-6 Hz"}
+actuator_damping: {value: 0.7, basis: assumed}
+
+# L1: the actuator position loop if it were closed across the network (central controller)
+loop_actuator:
+  kp_times_kv: {value: 14.4, basis: assumed, note: "gives 60 deg phase margin with the valve lag below"}
+  valve_tau_s: {value: 0.04, basis: assumed, note: "servo-valve + cylinder first-order lag"}
+
+# L2: yaw-rate stabilisation (steer correction from the yaw-rate error)
+loop_yaw:
+  wc_design_rad_s: {value: 6.0, basis: assumed, note: "about 1 Hz loop bandwidth, below the 3 Hz actuator; swept 4-8 rad/s"}
+  ti_s: {value: 0.3, basis: assumed, note: "PI integral time"}
+
+# L3: pure-pursuit path following (remote or semi-autonomous driving)
+loop_path:
+  t_lookahead_s: {value: 2.0, basis: assumed, note: "look-ahead time; swept 1.2-2.5 s"}
+  ld_min_m: {value: 8.0, basis: assumed}
+  rate_limit_deg_s: {value: 40.0, basis: assumed, note: "road-wheel slew limit"}
+
+speeds_kmh: {value: [20, 40, 60, 80, 90, 100, 110, 120], basis: assumed, note: "120 km/h is the top speed class of 8x8 vehicles on road"}
+phase_margin_floor_deg: {value: 30, basis: assumed, src: [OGATA2010], note: "classical floor for a robust loop; 30-60 deg is the usual design range"}
